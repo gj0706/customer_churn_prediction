@@ -1,7 +1,7 @@
 # Customer Churn Prediction with Spark
 Sparkify is a fictitious digital music service similar to Spotify or Pandora. Millions of users stream their favorite songs through this service everyday. Every time a user interact with the service such as playing songs, logging in/out ect, it generates log data. 
 
-![sparkify]()
+![sparkify](https://github.com/gj0706/customer_churn_prediction_with_Spark/blob/master/img/sparkify.png)
 
 The purpose of this project is to analyze these event data and predict which users are at risk to churn canceling their service. If we can accurately identify these users before they leare, the company can offer them discounts and incentives to them and potentially save business millions in revenue.
 
