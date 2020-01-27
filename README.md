@@ -37,7 +37,7 @@ The project consists of the following steps:
   - Feature vectorization: transform feature columns to 1 vector per feature.
   - Model selection: chose 3 models: Logistic Regression, Random Forest and Gradient Boosted Tree.
   - Hyper parameter tuning: used grid search cross validation.
-  - Evaluation.
+  - Evaluation. The results can be find on my [medium blog post](https://medium.com/@guojian0706/customer-churn-prediction-with-spark-334f243774ec) 
 
 
 
