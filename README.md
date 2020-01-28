@@ -21,27 +21,42 @@ The dataset used in this project is the simulated Sparkify activity data provide
 
 The project consists of the following steps:
 
-1. **Data exploration:** manipulated a subset of a large and realistic dataset with Spark SQL and Spark Dataframes;
+1. **Data exploration:** using Spark SQL and Spark Dataframes;
   - Data loading
   - Data overview
   - Data cleaning: handeling missing values and drop unecessary columns.
   - Define Churn: define churn as customer who confirmed cancellation.
   - Explore potential features related to customer churn. 
 
-2. **Feature engineering:** create relevant features for machine learning;
+2. **Feature engineering:** 
+
   - Created 11 features with 9 numerical and 2 binary features.
     - Numerical: 'totalSong','totalLifetime','avgSongsPerSession','totalThumbsup','totalThumbsdown','totalAddFriend','totalAddList','totalListenLength','totalInteraction'
     - Binary: 'downgraded','paid'
 
-3. **Modeling:** utilized the machine learning API with Spark ML to build and tune models.
-  - Feature vectorization: transform feature columns to 1 vector per feature.
-  - Model selection: chose 3 models: Logistic Regression, Random Forest and Gradient Boosted Tree.
-  - Hyper parameter tuning: used grid search cross validation.
-  - Evaluation. The results can be find on my [medium blog post](https://medium.com/@guojian0706/customer-churn-prediction-with-spark-334f243774ec) 
+3. **Metrics**
+
+- We choose **F1 score** as our metric for model evaluation. The reasons are:
+  - Our goal in this project is to predict churned user as accurately as possible, so that the company can retain as many churned users as possible by offering incentives or discounts. Thus it would be crucial if we falsely predicted a user(false negative) who actually churned as not churned. We will lose customer in this case. Therefore, we want to get relatively high recall rate. On the other hand, although offering discounts to users who didn’t churn is not a bad idea, considering cost, we want to avoid giving too many discounts for no reason. So we also need to get a relatively good precision score. F1 score is one that balance the two best.
+  - Another consideration is that in our dataset, the churned users is 52 out of 225, fairly small subset and imbalanced. In this case F1 score would best evaluate our models.
 
 
+4. **Modeling:** 
 
+  - Feature vectorization: used `VectorAssembler` and `StandardScaler` from `pyspark.ml.feature` module.
+  - Model selection: used `LogisticRegression`, `RandomForestClassifier` and `GBTClassifier` from `pyspark.ml.classification` module.
+  - Hyper parameter tuning: used `CrossValidator`, `ParamGridBuilder` from `pyspark.ml.tuning` module. 
+  - Evaluation. Used `MulticlassClassificationEvaluator` from `pyspark.ml.evaluation` module. 
+  
+  - Detailed explanations on this project can be find on my [medium blog post](https://medium.com/@guojian0706/customer-churn-prediction-with-spark-334f243774ec) 
 
+5. **Results**
+
+![Results](https://github.com/gj0706/customer_churn_prediction_with_Spark/blob/master/img/results.png)
+
+- The best model we got is Random Forest classifier.
+- The best parameter combanation for Random Forest classi is: numTrees: 40, maxDepth: 4 after we performed grid search cross validation.
+- The F1 score for the best model is 0.8226.
 
 
 ## Installation <a name="installation"></a>
